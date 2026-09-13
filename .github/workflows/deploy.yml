@@ -1,5 +1,4 @@
 name: Build and Deploy
-
 on:
   push:
     branches:
@@ -7,7 +6,6 @@ on:
   pull_request:
     branches:
       - '*'
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,22 +23,22 @@ jobs:
         run: |
           cp README.md content
           jupyter lite build --contents content --output-dir dist
+      - name: Add custom pages
+        run: |
+          cp submit.html dist/submit.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
-
   deploy:
     needs: build
     if: github.ref == 'refs/heads/main'
     permissions:
       pages: write
       id-token: write
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
