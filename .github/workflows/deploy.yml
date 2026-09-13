@@ -23,9 +23,6 @@ jobs:
         run: |
           cp README.md content
           jupyter lite build --contents content --output-dir dist
-      - name: Add custom pages
-        run: |
-          cp submit.html dist/submit.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
