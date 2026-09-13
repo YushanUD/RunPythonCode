@@ -276,20 +276,19 @@
     statusBox.className = 'status';
 
     try {
-      const res = await fetch(SCRIPT_URL, {
+      // mode: 'no-cors' is used because Google Apps Script doesn't reliably
+      // send back CORS headers JavaScript can read. The request still goes
+      // through and Code.gs still saves it -- we just can't read the response,
+      // so we treat "the fetch didn't throw" as success.
+      await fetch(SCRIPT_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids a CORS preflight
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(payload)
       });
 
-      const result = await res.json();
-
-      if (result.status === 'success') {
-        showStatus('success', 'Submitted! You can close this page or submit another assignment.');
-        form.reset();
-      } else {
-        showStatus('error', 'Something went wrong on the server: ' + (result.message || 'unknown error'));
-      }
+      showStatus('success', 'Submitted! You can close this page or submit another assignment.');
+      form.reset();
     } catch (err) {
       showStatus('error', 'Could not reach the submission server. Check your connection and try again.');
     } finally {
