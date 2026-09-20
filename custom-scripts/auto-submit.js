@@ -28,11 +28,11 @@
   // ============================ CONFIGURE ============================
   // Paste the URL you get from Apps Script "Deploy > New deployment".
   // It looks like: https://script.google.com/macros/s/AKfycb.../exec
-  var APPS_SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+  var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwCJ06jyivQ6c4F1bJA18Hgn4D_ahUUwmETlmqfosMpTVnSgjeAX1dG8zhzryOAXTt9PA/exec";
 
   // Shown to students and recorded in the Sheet so you can tell
   // assignments apart if you reuse this script for multiple labs.
-  var ASSIGNMENT_NAME = "BANA409 - Assignment Name Here";
+  var ASSIGNMENT_NAME = "BANA409 - Exercises and Assignments";
   // =====================================================================
 
   var STORAGE_KEY = "bana409_submitter_identity";
