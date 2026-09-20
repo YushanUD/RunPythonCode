@@ -25,9 +25,11 @@ jobs:
           jupyter lite build --contents content --output-dir dist
       - name: Inject integrity scripts into build output
         run: |
-          cp custom-scripts/paste-blocker.js dist/lab/paste-blocker.js
-          cp custom-scripts/auto-submit.js dist/lab/auto-submit.js
-          sed -i 's#</body>#<script src="./paste-blocker.js"></script>\n<script src="./auto-submit.js"></script>\n</body>#' dist/lab/index.html
+          for app in lab notebooks; do
+            cp custom-scripts/paste-blocker.js "dist/$app/paste-blocker.js"
+            cp custom-scripts/auto-submit.js "dist/$app/auto-submit.js"
+            sed -i 's#</body>#<script src="./paste-blocker.js"></script>\n<script src="./auto-submit.js"></script>\n</body>#' "dist/$app/index.html"
+          done
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
